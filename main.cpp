@@ -1,14 +1,9 @@
-#include<iostream>
-#include<vector>
-
 #include"func.hpp"
 
 using namespace std;
 
 int main(){
-    int a = 10;
-    print(a);
-    vector<Person> data;
+    vector<Person> data = fin();
     int tmp;
     cin >> tmp;
     while(tmp != 0){
@@ -16,6 +11,7 @@ int main(){
             Person a = vvod(data.size());
             data.push_back(a);
             data[data.size() - 1].print();
+            zapis(a);
         }else if(tmp == 2){
             cout << "Vvedite id" << "\n";
             int id;
@@ -30,5 +26,11 @@ int main(){
             data[id1-1].print();
         }
         cin >> tmp;
+    }
+    ofstream ofs;
+    ofs.open("data.txt", ofstream::out | ofstream::trunc);
+    ofs.close();
+    for(int i = 0;i < data.size();i++){
+        zapis(data[i]);
     }
 }

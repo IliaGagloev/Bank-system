@@ -1,5 +1,3 @@
-#include<iostream>
-#include<string.h>
 #include"func.hpp"
 
 using namespace std;
@@ -21,6 +19,7 @@ void popolnenie(Person* a){
     cin >> n;
     (*a).pop(n);
 }
+
 void perevod(Person* a, Person* b){
     cout << "Vvedite summu perevoda" << "\n";
     int n;
@@ -31,4 +30,29 @@ void perevod(Person* a, Person* b){
     }
     (*b).pop(-1 * n);
     (*a).pop(n);
+}
+void zapis(Person a){
+    ofstream fout;
+    fout.open("data.txt", ios::app);
+    fout  << a.get_id() << " " << a.get_name() << " " << a.get_surname() << " " << a.get_bal() <<"\n";
+    fout.close();
+}
+
+vector<Person> fin(){
+    ifstream fin;
+    fin.open("data.txt");
+    vector<Person> a;
+    while(!fin.eof()){
+        Person a1;
+        int id, bal;
+        string name ="", surname;
+        fin >> id >> name >> surname >> bal;
+        a1.init(id, bal, name, surname);
+        if(name == ""){
+            continue;
+        }
+        a.push_back(a1);
+    }
+    fin.close();
+    return a;
 }
